@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, createContext } from 'react'
 import { PRODUCTS } from '../products';
 
 export const ShopContext = createContext(null);
@@ -20,8 +20,10 @@ const ShopContextProvider = (props) => {
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({...prev, [itemId]: prev[itemId] - 1}))
     }
+
+    const contextValue = {cartItems, addToCart, removeFromCart}
     return (
-    <ShopContext.Provider>{props.children}</ShopContext.Provider>
+    <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>
   )
 }
 
